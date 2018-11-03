@@ -5,18 +5,21 @@
       "name": "client",
       "image": "smonn/multi-client",
       "hostname": "client",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "server",
       "image": "smonn/multi-server",
       "hostname": "api",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "worker",
       "image": "smonn/multi-worker",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "nginx",
@@ -31,7 +34,8 @@
       "links": [
         "client",
         "server"
-      ]
+      ],
+      "memory": 128
     }
   ]
 }
