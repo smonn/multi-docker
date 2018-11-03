@@ -19,3 +19,16 @@ after_success:
   - docker push smonn/multi-nginx
   - docker push smonn/multi-server
   - docker push smonn/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-1
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-us-east-1-259347196174
+  bucket_path: multi-docker
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key:
+    secure: $AWS_SECRET_ACCESS_KEY
