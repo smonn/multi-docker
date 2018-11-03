@@ -1,0 +1,21 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build --tag smonn/react-test --file ./client/Dockerfile.dev ./client
+
+script:
+  - docker run --env CI=true smonn/react-test yarn test
+
+after_success:
+  - docker build --tag smonn/multi-client ./client
+  - docker build --tag smonn/multi-nginx ./nginx
+  - docker build --tag smonn/multi-server ./server
+  - docker build --tag smonn/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+  - docker push smonn/multi-client
+  - docker push smonn/multi-nginx
+  - docker push smonn/multi-server
+  - docker push smonn/multi-worker
