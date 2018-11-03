@@ -14,7 +14,7 @@ after_success:
   - docker build --tag smonn/multi-nginx ./nginx
   - docker build --tag smonn/multi-server ./server
   - docker build --tag smonn/multi-worker ./worker
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
   - docker push smonn/multi-client
   - docker push smonn/multi-nginx
   - docker push smonn/multi-server
